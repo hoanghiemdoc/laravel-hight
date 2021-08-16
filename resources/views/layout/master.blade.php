@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
+{{--// đây là lớp xử lý phần header và phần footer --}}
+
+    <base href="{{asset('/')}}">   {{--  // truyền lớp base để nhận các phần tử ở lớp cha--}}
+
+
     <meta charset="UTF-8">
     <meta name="description" content="codelean Template">
     <meta name="keywords" content="codelean, unica, creative, html">
@@ -37,7 +41,7 @@
             <div class="ht-left">
                 <div class="mail-service">
                     <i class="fa fa-envelope"></i>
-                    dat3578@gmail.com
+                    hoanghiemdoc231@gmail.com
                 </div>
                 <div class="phone-service">
                     <i class="fa fa-phone"></i>
@@ -168,8 +172,9 @@
             </div>
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="active"><a href="{{asset('index.html')}}">Home</a> </li>
-                    <li><a href="{{asset('shop.html')}}">Shop</a> </li>
+               {{-- // đặt điều kiện thiết lâp lệnh active  tĩnh sang dao diện động--}}
+                    <li class="{{(request()->segment(1) == '') ? 'active' :''}}"><a href="./home">Home</a> </li>
+                    <li class="{{(request()->segment(1) == '') ? 'shop' :''}}"><a href="./shop">Shop</a> </li>
                     <li> <a href="">Collection</a>
                         <ul class="dropdown">
                             <li><a href="">Men's</a> </li>
@@ -177,8 +182,8 @@
                             <li><a href="">Kid's</a> </li>
                         </ul>
                     </li>
-                    <li><a href="{{asset('blog.html')}}">Blog</a> </li>
-                    <li><a href="{{asset('')}}contact.html">Contact</a> </li>
+                    <li class="{{(request()->segment(1) == '') ? 'blog' :''}}"><a href="./blog">Blog</a> </li>
+                    <li class="{{(request()->segment(1) == '') ? 'contact' :''}}"><a href="./contact">Contact</a> </li>
                     <li><a href="">Pages</a>
                         <ul class="dropdown">
                             <li><a href="{{asset('blog-details.html')}}">Blog Details</a> </li>
@@ -207,7 +212,7 @@
         <div class="logo-carousel owl-carousel">
             <div class="logo-item">
                 <div class="tablecell-inner">
-                    <img src="{{asset('public/frontend/img/logo-carousel/logo-1.png')}}">
+                    <img src="public/frontend/img/logo-carousel/logo-1.png">
                 </div>
             </div>
             <div class="logo-item">
@@ -251,7 +256,7 @@
                     <ul>
                         <li>NGUYET CAU TAM GIANG</li>
                         <li>Phone: 0394480757</li>
-                        <li>Email: dat3578@gmail.com</li>
+                        <li>Email: hoanghiemdoc231@gmail.com</li>
                     </ul>
                     <div class="footer-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
@@ -327,7 +332,15 @@
 
 <script src="public/frontend/js/owlcarousel2-filter.min.js"></script>
 
-<script src="public/frontend/js/main.js"></script>
+<script src= "public/frontend/js/main.js"></script>
+
 </body>
 
 </html>
+
+
+
+
+
+
+

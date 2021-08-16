@@ -2,6 +2,7 @@
 
 
 namespace App\Http\Controllers\Front;
+use App\Models\Blog;
 use App\Models\Product;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -18,8 +19,11 @@ class HomeController extends BaseController
 //      dd($menProducts); // cach để lấy phần tử bằng lệnh này xem lấy dc chưa
 //      dd($womanProducts);
 
+      // lấy blog của file
+      $blogs = Blog::orderBy('id','desc') ->limit(3)->get();
+//          dd($blogs);
       // truyền phần tử tại đây
-      return view('index',compact('menProducts','womanProducts'));
+      return view('index',compact('menProducts','womanProducts','blogs'));
   }
 
 }

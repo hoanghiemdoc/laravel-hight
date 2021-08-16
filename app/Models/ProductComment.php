@@ -16,4 +16,10 @@ class ProductComment extends Model
     public function product(){
         return $this->belongsTo(Product::class,'product_id','id');
     }
+
+    // them phan user thieu vao day
+    public function user(){
+        return $this->belongsTo(user::class,'user_id','id');
+    }
+
 }

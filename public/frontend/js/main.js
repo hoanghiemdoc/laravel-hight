@@ -56,7 +56,7 @@
         Product Slider
     --------------------*/
    $(".product-slider").owlCarousel({
-        loop: true,
+        loop: false,
         margin: 25,
         nav: true,
         items: 4,
@@ -182,12 +182,15 @@
 		minamount = $("#minamount"),
 		maxamount = $("#maxamount"),
 		minPrice = rangeSlider.data('min'),
-		maxPrice = rangeSlider.data('max');
+		maxPrice = rangeSlider.data('max'),
+	    minValue = rangeSlider.data('min-value') !== '' ? rangeSlider.data('min-value') : minPrice,
+        maxValue = rangeSlider.data('max-value') !== '' ? rangeSlider.data('max-value') : maxPrice;
+
 	    rangeSlider.slider({
 		range: true,
 		min: minPrice,
         max: maxPrice,
-		values: [minPrice, maxPrice],
+		values: [minValue, maxValue],
 		slide: function (event, ui) {
 			minamount.val('$' + ui.values[0]);
 			maxamount.val('$' + ui.values[1]);
@@ -228,8 +231,6 @@
     /*-------------------
 		Quantity change
 	--------------------- */
-
-
     var proQty = $('.pro-qty');
 	proQty.prepend('<span class="dec qtybtn">-</span>');
 	proQty.append('<span class="inc qtybtn">+</span>');
@@ -250,7 +251,30 @@
 	});
 
 
-    // Quantity change bắt sư kiện tại đây
+    /*-------------------
+        Product Filter - Index
+    --------------------- */
+
+    const product_men = $('.product-slider.men');
+    const product_women = $('.product-slider.women');
+
+
+    $('.filter-control').on('click', '.item', function () {
+        const $item = $(this);
+        const filter = $item.data('tag');
+        const category = $item.data('category');
+
+        $item.siblings().removeClass('active');
+        $item.addClass('active');
+
+        if (category === 'men') {
+            product_men.owlcarousel2_filter(filter);
+        }
+
+        if (category === 'women') {
+            product_women.owlcarousel2_filter(filter);
+        }
+    })
 
 
 

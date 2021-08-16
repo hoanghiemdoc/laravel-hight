@@ -28,8 +28,8 @@ class Product extends Model
 
     }
 
-    public function productDetails(){
-        return $this->hasMany(ProductDetails::class,'product_id','id');
+    public function productDetail(){
+        return $this->hasMany(ProductDetail::class,'product_id','id');
 
     }
 
