@@ -183,9 +183,9 @@
 		maxamount = $("#maxamount"),
 		minPrice = rangeSlider.data('min'),
 		maxPrice = rangeSlider.data('max'),
+        // thêm giá min, max  trị vào đây
 	    minValue = rangeSlider.data('min-value') !== '' ? rangeSlider.data('min-value') : minPrice,
         maxValue = rangeSlider.data('max-value') !== '' ? rangeSlider.data('max-value') : maxPrice;
-
 	    rangeSlider.slider({
 		range: true,
 		min: minPrice,
@@ -248,7 +248,32 @@
 			}
 		}
 		$button.parent().find('input').val(newVal);
+
+		//Update carts
+        let rowId = $button.parent().find('input').data('rowId');
+        updateCart(rowId,newVal);
+        console.log(rowId);
+
 	});
+
+	function updateCart(rowId,qty) {
+        // phương thức gọi ajax
+        $.ajax({
+            type: "GET",
+            url: "cart/update",
+            data: {rowId: rowId,qty:qty},
+            success: function (response) {
+                alert('update successfully!');
+                console.log(response);
+                location.reload();
+            },
+            error: function (error){
+              alert('Update failed.');
+                console.log(error);
+            },
+        });
+
+    }
 
 
     /*-------------------

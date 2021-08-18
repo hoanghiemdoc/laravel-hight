@@ -108,41 +108,7 @@
                 <div class="product-slider owl-carousel women">
                     {{--                // dùng vòng lặp để lặp các phẩn tử lên  chỉ cần lấy 1 cái rồi in ra--}}
                     @foreach($womanProducts as $womanProduct)
-                        <div class="product-item item {{$womanProduct->tag}}}">
-                            <div class="pi-pic">
-                                {{--                  <img src="{{asset('public/frontend/img/products/woman-1.jpg')}}" alt="">--}}
-                                <img src="public/frontend/img/products/{{$womanProduct -> productImages[0]->path }}"
-                                     alt="">
-                                @if( $womanProduct->discount != null)
-                                    <div class="sale">Sale</div>
-                                @endif
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href=""><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="{{asset('show.blade.php')}}">+ Quick View</a></li>
-                                    <li class="w-icon"><a href=""><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">
-                                    {{$womanProduct ->tag}}
-                                </div>
-                                <a href="">
-                                    <h5>{{$womanProduct ->name}}</h5>
-                                </a>
-                                <div class="product-price">
-                                    {{--                      // cách để hiển thị danh sách sản phẩm đc discount--}}
-                                    @if($womanProduct -> discount != null)
-                                        {{$womanProduct -> discount}}
-                                        <span> {{$womanProduct -> price}}</span>
-                                    @else
-                                        {{$womanProduct -> price}}
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
+                          @include('shop.components.product-item',['product' => $womanProduct]) {{--// truyền component từ product vào đây--}}
                     @endforeach
                 </div>
             </div>
@@ -152,7 +118,7 @@
 <!-- woman Banner Section End -->
 
 <!-- Deal Of The Week Section Begin-->
-<section class="deal-of-week set-bg spad" data-setbg="{{asset('public/frontend/img/time-g.jpg')}}">
+<section class="deal-of-week set-bg spad" data-setbg="public/frontend/img/time-g.jpg'">
     <div class="container">
         <div class="col-lg-6 text-center">
             <div class="section-title">
@@ -214,41 +180,7 @@
                 <div class="product-slider owl-carousel men">
                     <!--1 -->
                     @foreach( $menProducts  as $menProduct)
-                        <div class="product-item item {{$menProduct->tag}}}">
-                            <div class="pi-pic">
-                                {{--                  <img src="{{asset('public/frontend/img/products/woman-1.jpg')}}" alt="">--}}
-                                <img src="public/frontend/img/products/{{$menProduct -> productImages[0]->path }}"
-                                     alt="">
-                                @if( $menProduct->discount != null)
-                                    <div class="sale">Sale</div>
-                                @endif
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href=""><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="{{asset('show.blade.php')}}">+ Quick View</a></li>
-                                    <li class="w-icon"><a href=""><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">
-                                    {{$menProduct ->tag}}
-                                </div>
-                                <a href="">
-                                    <h5>{{$menProduct ->name}}</h5>
-                                </a>
-                                <div class="product-price">
-                                    {{--                      // cách để hiển thị danh sách sản phẩm đc discount--}}
-                                    @if($menProduct -> discount != null)
-                                        {{$menProduct -> discount}}
-                                        <span> {{$menProduct -> price}}</span>
-                                    @else
-                                        {{$menProduct -> price}}
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
+                        @include('shop.components.product-item',['product' => $menProduct])    {{--// truyền component từ product vào đây--}}
                     @endforeach
                 </div>
             </div>

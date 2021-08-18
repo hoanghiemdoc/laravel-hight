@@ -81,13 +81,17 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7">
-                    <div class="advanced-search">
-                        <button type="button" class="category-btn">All Category</button>
-                        <div class="input-group" >
-                            <input type="text" placeholder="What do you need?">
-                            <button type="button"><i class="ti-search" ></i></button>
+                    <form action="shop">
+{{--                        lọc dữ liệu search id ở đây--}}
+                        <div class="advanced-search"> {{-- lọc dữ liệu search id ở đây--}}
+                            <button type="button" class="category-btn">All Category</button>
+                            <div class="input-group" >
+                                <input name="search" type="text" value="{{request('search')}}" placeholder="What do you need?">
+                                <button type="submit"><i class="ti-search" ></i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+
                 </div>
                 <div class="col-lg-3 col-md-3 text-right">
                     <ul class="nav-right">
@@ -98,53 +102,46 @@
                             </a>
                         </li>
                         <li class="cart-icon">
-                            <a href="#" >
-                                <i  class="icon_bag_alt">
+                            <a href="./cart" >
+                                <i class="icon_bag_alt">
                                 </i>
-                                <span>3</span>
+                       {{-- // hiển thị sản phẩm giỏ hàng tại đây--}}
+                                <span>{{ Cart::count() }}</span>
                             </a>
                             <div class="cart-hover">
                                 <div class="select-items">
                                     <table>
                                         <tbody>
+                                  {{-- // vòng lặp lại nội dung sản phẩm giỏ hàng--}}
+                                  @foreach(Cart::content() as $cart)
                                         <tr>
-                                            <td class="si-pic"><img src="{{asset('public/frontend/img/select-product-1.jpg')}}"></td>
+                                            <td class="si-pic"><img src="public/frontend/img/products/{{ $cart->options->images[0]->path }}"></td>
                                             <td class="si-text">
                                                 <div class="product-selected">
-                                                    <p>$60.00 x 1</p>
-                                                    <h6>Kabino Beside Table</h6>
+                                                    <p>${{number_format($cart->price,2)}} * {{$cart->qty}}</p>
+                                                    <h6>{{$cart->name}}</h6>
                                                 </div>
                                             </td>
+                                          {{-- // add phần xóa tại đây--}}
                                             <td class="si-close">
-                                                <i class="ti-close"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="si-pic"><img src="{{asset('public/frontend/img/select-product-2.jpg')}}"></td>
-                                            <td class="si-text">
-                                                <div class="product-selected">
-                                                    <p>$60.00 x 1</p>
-                                                    <h6>Kabino Beside Table</h6>
-                                                </div>
-                                            </td>
-                                            <td class="si-close">
-                                                <i class="ti-close"></i>
+                                                <i onclick="window.location='./cart/delete/{{$cart->rowId}}'" class="ti-close"></i>
                                             </td>
                                         </tr>
                                         </tbody>
+                                        @endforeach
                                     </table>
                                 </div>
                                 <div class="select-total">
                                     <span>total:</span>
-                                    <h5>$120.00</h5>
+                                    <h5>${{Cart::total()}}</h5>
                                 </div>
                                 <div class="select-button">
-                                    <a href="{{asset('shopping-cart.html')}}" class="primary-btn view-card">VIEW CARD</a>
-                                    <a href="{{asset('check-out.html')}}" class="primary-btn checkout-btn">CHECK OUT</a>
+                                    <a href="./cart" class="primary-btn view-card">VIEW CARD</a>
+                                    <a href="./checkout" class="primary-btn checkout-btn">CHECK OUT</a>
                                 </div>
                             </div>
                         </li>
-                        <li  class="cart-price">$150.00</li>
+                        <li  class="cart-price">${{Cart::total()}}</li>
                     </ul>
                 </div>
             </div>
@@ -318,6 +315,9 @@
 <!-- Footer Section Begin-->
 
 <!-- Js Plugins -->
+
+{{--// thêm phần css mới cho phần phân trang--}}
+<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
 
 <script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
